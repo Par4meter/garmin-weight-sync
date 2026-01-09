@@ -29,15 +29,15 @@ jobs:
           # 检查是否存在 requirements.txt，存在则安装
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       # 登录小米
-      - name: Login xiaomi
-        env: 
-          # 如果你的脚本里用了 os.environ.get('MY_API_KEY')
-          # 请先在仓库 Settings -> Secrets and variables -> Actions 中添加密钥
-          GM_USERNAME: ${{ secrets.GM_USERNAME }}
-          GM_PWD: ${{ secrets.GM_PWD }}
-          XM_USERNAME: ${{ secrets.XM_USERNAME }}
-          XM_PWD: ${{ secrets.XM_PWD }}
-        run: python ./src/xiaomi/login.py --config users.json
+      # - name: Login xiaomi
+      #   env: 
+      #     # 如果你的脚本里用了 os.environ.get('MY_API_KEY')
+      #     # 请先在仓库 Settings -> Secrets and variables -> Actions 中添加密钥
+      #     GM_USERNAME: ${{ secrets.GM_USERNAME }}
+      #     GM_PWD: ${{ secrets.GM_PWD }}
+      #     XM_USERNAME: ${{ secrets.XM_USERNAME }}
+      #     XM_PWD: ${{ secrets.XM_PWD }}
+      #   run: python ./src/xiaomi/login.py --config users.json
       # 同步数据 
       - name: sync data
         env: 
@@ -47,4 +47,6 @@ jobs:
           GM_PWD: ${{ secrets.GM_PWD }}
           XM_USERNAME: ${{ secrets.XM_USERNAME }}
           XM_PWD: ${{ secrets.XM_PWD }}
+          XM_USERID: ${{ secrets.XM_USERID }}
+          XM_PASS_TOKEN: ${{ secrets.XM_PASS_TOKEN }}
         run: python ./src/main.py

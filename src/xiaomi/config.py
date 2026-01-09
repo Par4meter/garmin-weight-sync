@@ -23,6 +23,8 @@ class ConfigManager:
                     print("using env config")
                     config_data['users'][0]['username'] = xm_name
                     config_data['users'][0]['password'] = os.environ.get("XM_PWD")
+                    config_data['users'][0]['token']['userId'] = os.environ.get("XM_USERID")
+                    config_data['users'][0]['token']['passToken'] = os.environ.get("XM_PASS_TOKEN")
                     config_data['users'][0]['garmin']['email'] = gm_name
                     config_data['users'][0]['garmin']['password'] = os.environ.get("GM_PWD")
                 return config_data
