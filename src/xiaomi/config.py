@@ -18,8 +18,9 @@ class ConfigManager:
 
                 xm_name = os.environ.get("XM_USERNAME")
                 gm_name = os.environ.get("GM_USERNAME ")
-                
+                print(f"xm_name:{xm_name},gm_name:{gm_name}")
                 if xm_name and gm_name:
+                    print("using env config")
                     config_data.users[0].username = xm_name
                     config_data.users[0].password = os.environ.get("XM_PWD")
                     config_data.users[0].garmin.email = gm_name
