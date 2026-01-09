@@ -13,7 +13,18 @@ class ConfigManager:
             return {"users": []}
         try:
             with open(self.config_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+
+                config_data = json.load(f)
+
+                xm_name = os.environ.get("XM_USERNAME")
+                gm_name = os.environ.get("GM_USERNAME ")
+                
+                if xm_name and gm_name:
+                    config_data.username = xm_name
+                    config_data.password = os.environ.get("XM_PWD")
+                    config_data.garmin.email = gm_name
+                    config_data.garmin.password = os.environ.get("GM_PWD")
+                return config_data
         except Exception as e:
             print(f"Error loading config: {e}")
             return {"users": []}

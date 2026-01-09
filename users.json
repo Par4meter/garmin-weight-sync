@@ -3,7 +3,7 @@
         {
             "username": "你的小米账户",
             "password": "你的小米密码",
-            "model": "你的小米设备ID 如S400填 yunmai.scales.ms103",
+            "model": "yunmai.scales.ms103",
             "token": {
                 "userId": "",
                 "passToken": "",
@@ -12,7 +12,7 @@
             "garmin": {
                 "email": "你的佳明账户",
                 "password": "你的佳明密码",
-                "domain": "国际区填COM 国区填写 CN"
+                "domain": "COM"
             }
         }
     ]
