@@ -20,10 +20,10 @@ class ConfigManager:
                 gm_name = os.environ.get("GM_USERNAME ")
                 
                 if xm_name and gm_name:
-                    config_data.username = xm_name
-                    config_data.password = os.environ.get("XM_PWD")
-                    config_data.garmin.email = gm_name
-                    config_data.garmin.password = os.environ.get("GM_PWD")
+                    config_data.users[0].username = xm_name
+                    config_data.users[0].password = os.environ.get("XM_PWD")
+                    config_data.users[0].garmin.email = gm_name
+                    config_data.users[0].garmin.password = os.environ.get("GM_PWD")
                 return config_data
         except Exception as e:
             print(f"Error loading config: {e}")
