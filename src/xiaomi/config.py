@@ -17,7 +17,7 @@ class ConfigManager:
                 config_data = json.load(f)
 
                 xm_name = os.environ.get("XM_USERNAME")
-                gm_name = os.environ.get("GM_USERNAME ")
+                gm_name = os.environ.get("GM_USERNAME")
                 print(f"xm_name:{xm_name},gm_name:{gm_name}")
                 if xm_name and gm_name:
                     print("using env config")
