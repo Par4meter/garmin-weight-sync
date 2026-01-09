@@ -90,7 +90,7 @@ def main():
     users = config_mgr.get_users()
 
     if not users:
-        logger.warning(f"No users found in {args.config}. Please add users to the configuration file.")
+        print(f"No users found in {args.config}. Please add users to the configuration file.")
         
         # Create a template if it doesn't exist/empty
         if not users:
@@ -115,7 +115,7 @@ def main():
              }
              with open(args.config, 'w') as f:
                  json.dump(template, f, indent=4)
-             logger.info(f"Created template {args.config}")
+             print(f"Created template {args.config}")
              return
 
     for user in users:
@@ -127,7 +127,7 @@ def main():
         if not username:
             continue
 
-        logger.info(f"Processing user: {username}")
+        print(f"Processing user: {username}")
         
         client = XiaomiClient(username=username)
         
@@ -141,27 +141,27 @@ def main():
             
             try:
                 # Validate/Refresh token
-                logger.info("Logging in with saved Xiaomi token...")
+                print("Logging in with saved Xiaomi token...")
                 new_token_data = client.login_from_token()
                 
                 # Update token in config if changed
                 if new_token_data:
                      config_mgr.update_user_token(username, new_token_data)
-                     logger.info("Xiaomi token refreshed and saved")
+                     print("Xiaomi token refreshed and saved")
                 
                 # Fetch weights
-                logger.info(f"Fetching weight data for model: {model}")
+                print(f"Fetching weight data for model: {model}")
                 weights = client.get_model_weights(model)
                 
                 if weights:
-                    logger.info(f"Successfully retrieved {len(weights)} weight records")
+                    print(f"Successfully retrieved {len(weights)} weight records")
                     display_weight_data(weights, limit=args.limit)
 
                     # Save to JSON file
                     output_file = f"data/weight_data_{username}.json"
                     with open(output_file, 'w', encoding='utf-8') as f:
                         json.dump(weights, f, indent=2, ensure_ascii=False)
-                    logger.info(f"Weight data saved to {output_file}")
+                    print(f"Weight data saved to {output_file}")
                     
                     # Generate FIT file if requested
                     fit_file_path = None
@@ -181,27 +181,27 @@ def main():
                             )
                             
                             if g_client.login():
-                                logger.info("Synchronizing to Garmin Connect...")
+                                print("Synchronizing to Garmin Connect...")
                                 status = g_client.upload_fit(fit_file_path)
                                 if status == "SUCCESS":
-                                    logger.info("✅ Successfully synchronized weight data to Garmin Connect!")
+                                    print("✅ Successfully synchronized weight data to Garmin Connect!")
                                 elif status == "DUPLICATE":
-                                    logger.info("ℹ️ Data already exists on Garmin Connect (Duplicate).")
+                                    print("ℹ️ Data already exists on Garmin Connect (Duplicate).")
                                 else:
-                                    logger.error(f"❌ Garmin sync failed: {status}")
+                                    print(f"❌ Garmin sync failed: {status}")
                             else:
-                                logger.error("❌ Garmin login failed. Synchronization aborted.")
+                                print("❌ Garmin login failed. Synchronization aborted.")
                         else:
-                            logger.warning(f"⚠️ Garmin credentials missing for {username}. Skipping sync.")
+                            print(f"⚠️ Garmin credentials missing for {username}. Skipping sync.")
                 else:
-                    logger.warning("No weight data found")
+                    print("No weight data found")
                 
             except Exception as e:
-                logger.error(f"Failed to process data for {username}: {e}")
+                print(f"Failed to process data for {username}: {e}")
                 logger.exception("Detailed error:")
         else:
-             logger.warning(f"No valid token for {username}. Please run the login tool to generate a token.")
-             logger.info("Run: python src/xiaomi/login.py --config users.json")
+             print(f"No valid token for {username}. Please run the login tool to generate a token.")
+             print("Run: python src/xiaomi/login.py --config users.json")
 
 
 if __name__ == "__main__":
