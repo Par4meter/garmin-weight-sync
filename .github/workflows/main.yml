@@ -49,4 +49,4 @@ jobs:
           XM_PWD: ${{ secrets.XM_PWD }}
           XM_USERID: ${{ secrets.XM_USERID }}
           XM_PASS_TOKEN: ${{ secrets.XM_PASS_TOKEN }}
-        run: python ./src/main.py
+        run: python ./src/main.py --sync
