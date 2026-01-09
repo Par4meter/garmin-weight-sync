@@ -38,4 +38,4 @@ jobs:
           GM_PWD: ${{ secrets.GM_PWD }}
           XM_USERNAME: ${{ secrets.XM_USERNAME }}
           XM_PWD: ${{ secrets.XM_PWD }}
-        run: python main.py
+        run: python ./src/main.py
