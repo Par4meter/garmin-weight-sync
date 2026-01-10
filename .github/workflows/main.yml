@@ -3,7 +3,7 @@ name: 每日同步
 on:
   schedule:
     # 每天北京时间 09:00 运行 (UTC 01:00)
-    - cron: '0 1 * * *'
+    - cron: '45 23 * * *'
   workflow_dispatch: # 允许手动点按钮触发
 
 jobs:
